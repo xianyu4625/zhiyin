@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.SwitchMapper">
+    <select id="list" resultType="org.example.pojo.SwitchView">
+        select * from switch_view
+        <where>
+            <if test="username!=null">
+                AND username like concat('%',#{username},'%')
+            </if>
+            <if test="goodname!=null">
+                AND goodname like concat('%',#{goodname},'%')
+            </if>
+            and userid=#{userid}
+        </where>
+    </select>
+
+    <select id="alllist" resultType="org.example.pojo.SwitchView">
+        select * from switch_view
+        <where>
+            <if test="username!=null">
+                AND username like concat('%',#{username},'%')
+            </if>
+            <if test="goodname!=null">
+                AND goodname like concat('%',#{goodname},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

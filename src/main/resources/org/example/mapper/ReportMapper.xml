@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.ReportMapper">
+<!--    <select id="selected" resultType="org.example.pojo.ReportView">-->
+<!--        select * from report_user_view-->
+<!--        <where>-->
+<!--            <if test="nickname!=null">-->
+<!--                nickname=#{nickname}-->
+<!--            </if>-->
+<!--            <if test="contents != null">-->
+<!--                reportcontent like  concat('%', #{contents}, '%')-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
+    <select id="selectReport" resultType="org.example.pojo.ReportView">
+        select * from report_user_view
+        <where>
+            <if test="nickname!=null">
+                nickname like concat('%',#{nickname},'%')
+            </if>
+            <if test="contents != null">
+                <if test="nickname!=null">
+                    AND
+                </if>
+                reportcontent like concat('%', #{contents}, '%')
+            </if>
+            and show=0
+        </where>
+    </select>
+
+    <select id="selectselfReport" resultType="org.example.pojo.ReportView">
+        select * from report_user_view
+        <where>
+            <if test="nickname!=null">
+                nickname like concat('%',#{nickname},'%')
+            </if>
+            <if test="contents != null">
+                <if test="nickname!=null">
+                    AND
+                </if>
+                reportcontent like concat('%', #{contents}, '%')
+            </if>
+        and userid=#{userid} and show=0
+        </where>
+    </select>
+
+</mapper>
